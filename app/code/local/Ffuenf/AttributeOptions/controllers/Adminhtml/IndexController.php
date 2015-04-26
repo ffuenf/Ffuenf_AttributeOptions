@@ -24,9 +24,7 @@ class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Contro
         $error = array();
         $success = array();
         if (!Mage::helper('ffuenf_attributeoptions')->isExtensionActive()) {
-            if (count($error)) {
-                Mage::getSingleton('adminhtml/session')->addError(Mage::helper('ffuenf_attributeoptions')->__('Extension Ffuenf_AttributeOptions is disabled! See configuration.'));
-            }
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('ffuenf_attributeoptions')->__('Extension Ffuenf_AttributeOptions is disabled! See configuration.'));
             $this->_redirectReferer();
         }
         $options = $this->getRequest()->getParam('options');
@@ -58,12 +56,6 @@ class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Contro
         $this->read = Mage::getSingleton('core/resource')->getConnection('core_read');
         $error = array();
         $success = array();
-        if (!Mage::helper('ffuenf_attributeoptions')->isExtensionActive()) {
-            if (count($error)) {
-                Mage::getSingleton('adminhtml/session')->addError(Mage::helper('ffuenf_attributeoptions')->__('Extension Ffuenf_AttributeOptions is disabled! See configuration.'));
-            }
-            $this->_redirectReferer();
-        }
         $merge = $this->getRequest()->getParam('merge');
         if (!isset($merge) || count($merge) == 0) {
             $error[] = Mage::helper('ffuenf_attributeoptions')->__('No options to merge selected!');

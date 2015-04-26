@@ -55,32 +55,34 @@ class Ffuenf_AttributeOptions_Helper_Data extends Ffuenf_AttributeOptions_Helper
     public function getAllAttributeValuesFromAttribute($attribute)
     {
         $attribute = Mage::getModel('eav/config')->getAttribute('catalog_product', $attribute);
+        $attributeArray = array();
         foreach ($attribute->getSource()->getAllOptions(true, true) as $option) {
             $attributeArray[$option['value']] = $option['label'];
         }
         return $attributeArray;
     }
 
-    public function addAttributeValue($arg_attribute, $arg_value)
+    public function addAttributeValue($argattribute, $argvalue)
     {
-        $attribute_model = Mage::getModel('eav/entity_attribute');
-        $attribute_options_model = Mage::getModel('eav/entity_attribute_source_table');
-        $attribute_code = $attribute_model->getIdByCode('catalog_product', $arg_attribute);
-        $attribute = $attribute_model->load($attribute_code);
-        $attribute_table = $attribute_options_model->setAttribute($attribute);
-        $options = $attribute_options_model->getAllOptions(false);
-        $value['option'] = array($arg_value);
+        $attributemodel = Mage::getModel('eav/entity_attribute');
+        $attributeoptionsmodel = Mage::getModel('eav/entity_attribute_source_table');
+        $attributecode = $attributemodel->getIdByCode('catalog_product', $argattribute);
+        $attribute = $attributemodel->load($attributecode);
+        $attributetable = $attributeoptionsmodel->setAttribute($attribute);
+        $options = $attributeoptionsmodel->getAllOptions(false);
+        $value = array();
+        $value['option'] = array($argvalue);
         $result = array('value' => $value);
         $attribute->setData('option', $result);
         $attribute->save();
-        $attribute_model = Mage::getModel('eav/entity_attribute');
-        $attribute_options_model = Mage::getModel('eav/entity_attribute_source_table');
-        $attribute_code = $attribute_model->getIdByCode('catalog_product', $arg_attribute);
-        $attribute = $attribute_model->load($attribute_code);
-        $attribute_table = $attribute_options_model->setAttribute($attribute);
-        $options = $attribute_options_model->getAllOptions(false);
+        $attributemodel = Mage::getModel('eav/entity_attribute');
+        $attributeoptionsmodel = Mage::getModel('eav/entity_attribute_source_table');
+        $attributecode = $attributemodel->getIdByCode('catalog_product', $argattribute);
+        $attribute = $attributemodel->load($attributecode);
+        $attributetable = $attributeoptionsmodel->setAttribute($attribute);
+        $options = $attributeoptionsmodel->getAllOptions(false);
         foreach ($options as $option) {
-            if ($option['label'] == $arg_value) {
+            if ($option['label'] == $argvalue) {
                 return $option['value'];
             }
         }
