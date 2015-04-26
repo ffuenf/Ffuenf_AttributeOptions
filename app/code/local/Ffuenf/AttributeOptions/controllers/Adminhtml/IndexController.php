@@ -75,7 +75,7 @@ class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Contro
         if (empty($mergegoal)) {
             $error[] = Mage::helper('ffuenf_attributeoptions')->__("You haven't selected a merge goal.");
         }
-        $attribute_id = $this->getRequest()->getParam('attribute_id');
+        $attributeid = $this->getRequest()->getParam('attribute_id');
         if (count($error) == 0) {
             $deleteOptions = array();
             foreach ($merge as $value) {
@@ -83,7 +83,7 @@ class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Contro
                     continue;
                 }
                 // do the hard work
-                $options = $this->read->fetchAll('SELECT value_id,value FROM catalog_product_entity_int WHERE attribute_id = ? AND value = ?', array($attribute_id, $value));
+                $options = $this->read->fetchAll('SELECT value_id,value FROM catalog_product_entity_int WHERE attribute_id = ? AND value = ?', array($attributeid, $value));
                 foreach ($options as $option) {
                     $this->write->query('UPDATE `' . Mage::getSingleton('core/resource')->getTableName('catalog_product_entity_int') . '` SET value = \'' . $mergegoal . '\' WHERE value_id = \'' . $option['value_id'] . '\'');
                 }
