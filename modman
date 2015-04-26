@@ -1,0 +1,4 @@
+app/code/local/Ffuenf/AttributeOptions app/code/local/Ffuenf/AttributeOptions
+app/etc/modules/Ffuenf_AttributeOptions.xml app/etc/modules/Ffuenf_AttributeOptions.xml
+app/design/adminhtml/default/default/template/ffuenf/attributeoptions app/design/adminhtml/default/default/template/ffuenf/attributeoptions
+app/locale/de_DE/Ffuenf_AttributeOptions.csv app/locale/de_DE/Ffuenf_AttributeOptions.csv

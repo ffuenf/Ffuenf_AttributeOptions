@@ -1,0 +1,46 @@
+{
+  "name": "Ffuenf/Ffuenf_FixCatalogOptionSort",
+  "license": "MIT",
+  "description": "This is a extension for Magento Community Edition that allows batch adding of attribute options and drag & drop to rearrange their order.",
+  "authors": [
+    {
+      "name": "Achim Rosenhagen",
+      "email": "a.rosenhagen@ffuenf.de"
+    }
+  ],
+  "type": "magento-module",
+  "require": {
+    "aoepeople/composer-installers": "*",
+    "colinmollenhour/modman": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.*"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://packages.firegento.com"
+    }
+  ],
+  "extra": {
+    "magento-root-dir": "./magento/",
+    "map": [
+      [
+        "app/code/local/Ffuenf/AttributeOptions",
+        "app/code/local/Ffuenf/AttributeOptions"
+      ],
+      [
+        "app/design/adminhtml/default/default/template/ffuenf/attributeoptions",
+        "app/design/adminhtml/default/default/template/ffuenf/attributeoptions"
+      ],
+      [
+        "app/locale/de_DE/Ffuenf_AttributeOptions.csv",
+        "app/locale/de_DE/Ffuenf_AttributeOptions.csv"
+      ],
+      [
+        "app/etc/modules/Ffuenf_AttributeOptions.xml",
+        "app/etc/modules/Ffuenf_AttributeOptions.xml"
+      ]
+    ]
+  }
+}

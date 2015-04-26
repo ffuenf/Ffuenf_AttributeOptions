@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Ffuenf_AttributeOptions extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category   Ffuenf
+ * @package    Ffuenf_AttributeOptions
+ * @author     Achim Rosenhagen <a.rosenhagen@ffuenf.de>
+ * @copyright  Copyright (c) 2015 ffuenf (http://www.ffuenf.de)
+ * @license    http://opensource.org/licenses/mit-license.php MIT License
+*/
+-->
+<config>
+    <modules>
+        <Ffuenf_AttributeOptions>
+            <version>0.0.1</version>
+        </Ffuenf_AttributeOptions>
+    </modules>
+    <global>
+        <helpers>
+            <ffuenf_attributeoptions>
+                <class>Ffuenf_AttributeOptions_Helper</class>
+            </ffuenf_attributeoptions>
+        </helpers>
+        <blocks>
+            <adminhtml>
+                <rewrite>
+                    <catalog_product_attribute_edit_tab_options>Ffuenf_AttributeOptions_Block_Catalog_Product_Attribute_Edit_Tab_Options</catalog_product_attribute_edit_tab_options>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+    </global>
+    <adminhtml>
+        <translate>
+            <modules>
+                <attributeoptions>
+                    <files>
+                        <default>Ffuenf_AttributeOptions.csv</default>
+                    </files>
+                </attributeoptions>
+            </modules>
+        </translate>
+    </adminhtml>
+    <default>
+        <attributeoptions>
+            <general>
+                <enabled>0</enabled>
+            </general>
+        </attributeoptions>
+    </default>
+    <phpunit>
+        <suite>
+            <modules>
+                <Ffuenf_AttributeOptions/>
+            </modules>
+        </suite>
+    </phpunit>
+</config>
