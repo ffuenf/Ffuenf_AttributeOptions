@@ -24,7 +24,9 @@ class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Contro
         $error = array();
         $success = array();
         if (!Mage::helper('ffuenf_attributeoptions')->isExtensionActive()) {
-            if (count($error)) Mage::getSingleton('adminhtml/session')->addError(Mage::helper('ffuenf_attributeoptions')->__('Extension Ffuenf_AttributeOptions is disabled! See configuration.'));
+            if (count($error)) {
+                Mage::getSingleton('adminhtml/session')->addError(Mage::helper('ffuenf_attributeoptions')->__('Extension Ffuenf_AttributeOptions is disabled! See configuration.'));
+            }
             $this->_redirectReferer();
         }
         $options = $this->getRequest()->getParam('options');
@@ -41,8 +43,12 @@ class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Contro
                 $error[] = Mage::helper('ffuenf_attributeoptions')->__('Attribute option') . ' \'' . $option . '\' ' . Mage::helper('ffuenf_attributeoptions')->__('already existed in') . ' \'' . Mage::helper('ffuenf_attributeoptions')->__($attr['frontend_label']) . '\'';
             }
         }
-        if (count($success)) Mage::getSingleton('core/session')->addSuccess(implode("<br />", $success));
-        if (count($error)) Mage::getSingleton('core/session')->addError(implode("<br />", $error));
+        if (count($success)) {
+            Mage::getSingleton('core/session')->addSuccess(implode("<br />", $success));
+        }
+        if (count($error)) {
+            Mage::getSingleton('core/session')->addError(implode("<br />", $error));
+        }
         $this->_redirectReferer();
     }
 
@@ -53,14 +59,16 @@ class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Contro
         $error = array();
         $success = array();
         if (!Mage::helper('ffuenf_attributeoptions')->isExtensionActive()) {
-            if (count($error)) Mage::getSingleton('adminhtml/session')->addError(Mage::helper('ffuenf_attributeoptions')->__('Extension Ffuenf_AttributeOptions is disabled! See configuration.'));
+            if (count($error)) {
+                Mage::getSingleton('adminhtml/session')->addError(Mage::helper('ffuenf_attributeoptions')->__('Extension Ffuenf_AttributeOptions is disabled! See configuration.'));
+            }
             $this->_redirectReferer();
         }
         $merge = $this->getRequest()->getParam('merge');
-        if (!isset($merge) || count($merge)==0) {
+        if (!isset($merge) || count($merge) == 0) {
             $error[] = Mage::helper('ffuenf_attributeoptions')->__('No options to merge selected!');
         }
-        if (isset($merge) && count($merge)==1) {
+        if (isset($merge) && count($merge) == 1) {
             $error[] = Mage::helper('ffuenf_attributeoptions')->__('Only one option to merge is selected!');
         }
         $mergegoal = $this->getRequest()->getParam('mergegoal');
@@ -71,7 +79,9 @@ class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Contro
         if (count($error) == 0) {
             $deleteOptions = array();
             foreach ($merge as $value) {
-                if ($value == $mergegoal) continue;
+                if ($value == $mergegoal) {
+                    continue;
+                }
                 // do the hard work
                 $options = $this->read->fetchAll('SELECT value_id,value FROM catalog_product_entity_int WHERE attribute_id = ? AND value = ?', array($attribute_id, $value));
                 foreach ($options as $option) {
@@ -85,8 +95,12 @@ class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Contro
             $setup = new Mage_Eav_Model_Entity_Setup('core_setup');
             $setup->addAttributeOption($deleteOptions);
         }
-        if (count($success)) Mage::getSingleton('core/session')->addSuccess(implode("<br />", $success));
-        if (count($error)) Mage::getSingleton('core/session')->addError(implode("<br />", $error));
+        if (count($success)) {
+            Mage::getSingleton('core/session')->addSuccess(implode("<br />", $success));
+        }
+        if (count($error)) {
+            Mage::getSingleton('core/session')->addError(implode("<br />", $error));
+        }
         $this->_redirectReferer();
     }
 
