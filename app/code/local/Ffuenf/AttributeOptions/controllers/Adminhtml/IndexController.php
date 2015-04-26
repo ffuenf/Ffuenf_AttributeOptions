@@ -18,8 +18,11 @@
 
 class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Controller_Front_Action
 {
+
     public function indexAction()
     {
+        $error = array();
+        $success = array();
         if (!Mage::helper('ffuenf_attributeoptions')->isExtensionActive()) {
             if (count($error)) Mage::getSingleton('adminhtml/session')->addError(Mage::helper('ffuenf_attributeoptions')->__('Extension Ffuenf_AttributeOptions is disabled! See configuration.'));
             $this->_redirectReferer();
@@ -28,8 +31,6 @@ class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Contro
         $options = explode("\n", $options);
         $attr = Mage::helper('ffuenf_attributeoptions')->getAttributeInformation($this->getRequest()->getParam('attribute_id'));
         $existing = array_flip(Mage::helper('ffuenf_attributeoptions')->getAllAttributeValuesFromAttribute($attr['attribute_code']));
-        $success = array();
-        $error = array();
         foreach ($options as $key=>$option) {
             $option = trim($option);
             if (!isset($existing[$option])) { // skip existing values
@@ -68,6 +69,7 @@ class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Contro
         }
         $attribute_id = $this->getRequest()->getParam('attribute_id');
         if (count($error) == 0) {
+            $deleteOptions = array();
             foreach ($merge as $value) {
                 if ($value == $mergegoal) continue;
                 // do the hard work
@@ -86,5 +88,15 @@ class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Contro
         if (count($success)) Mage::getSingleton('core/session')->addSuccess(implode("<br />", $success));
         if (count($error)) Mage::getSingleton('core/session')->addError(implode("<br />", $error));
         $this->_redirectReferer();
+    }
+
+    /**
+     * Check if the admin user is allowed to access the functionality of this extension
+     *
+     * @return bool
+     */
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('admin/system/config/attributeoptions');
     }
 }

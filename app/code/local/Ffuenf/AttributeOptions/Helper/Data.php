@@ -25,20 +25,20 @@ class Ffuenf_AttributeOptions_Helper_Data extends Ffuenf_AttributeOptions_Helper
     const CONFIG_EXTENSION_ACTIVE = 'attributeoptions/general/enabled';
 
     /**
-    * Variable for if the extension is active
+    * A variable for the extension active state setting
     *
     * @var bool
     */
     protected $bExtensionActive;
 
     /**
-    * Check to see if the extension is active
+    * A check for the extension state
     *
     * @return bool
     */
     public function isExtensionActive()
     {
-        return $this->getStoreFlag(self::CONFIG_EXTENSION_ACTIVE, 'bExtensionActive');
+        return $this->getStoreConfigFlag(self::CONFIG_EXTENSION_ACTIVE, 'bExtensionActive');
     }
 
     public function getAttributeInformation($attribute)

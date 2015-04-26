@@ -19,13 +19,13 @@
 class Ffuenf_AttributeOptions_Helper_Core extends Mage_Core_Helper_Abstract
 {
     /**
-    * Get a store flag value and set to against the object
+    * Get a store flag value and set against the object
     *
     * @param string $sStoreFlagPath
     * @param string $sStoreFlagAttribute
     * @return bool
     */
-    public function getStoreFlag($sStoreFlagPath, $sStoreFlagAttribute)
+    public function getStoreConfigFlag($sStoreFlagPath, $sStoreFlagAttribute)
     {
         return (bool)$this->getStoreConfig($sStoreFlagPath, $sStoreFlagAttribute);
     }
