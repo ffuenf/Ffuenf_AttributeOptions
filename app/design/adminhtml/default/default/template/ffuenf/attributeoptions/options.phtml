@@ -11,14 +11,14 @@ if($attributeType == 'multiselect') {
   <ul class="messages">
     <li class="notice-msg">
       <ul>
-        <li><?php echo Mage::helper('catalog')->__('If you do not specify an option value for a specific store view then the default (Admin) value will be used.') ?></li>
+        <li><?php echo Mage::helper('ffuenf_attributeoptions')->__('If you do not specify an option value for a specific store view then the default (Admin) value will be used.') ?></li>
       </ul>
     </li>
   </ul>
 </div>
 <div class="entity-edit">
   <div class="entry-edit-head">
-    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('catalog')->__('Manage Titles (Size, Color, etc.)') ?></h4>
+    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('ffuenf_attributeoptions')->__('Manage Titles (Size, Color, etc.)') ?></h4>
   </div>
   <div class="box">
     <div class="hor-scroll">
@@ -43,15 +43,15 @@ if($attributeType == 'multiselect') {
 <?php if(Mage::getStoreConfig('attributeoptions/general/enabled')): ?>
   <div class="entity-edit" id="matage-options-panel">
     <div class="entry-edit-head">
-      <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('catalog')->__('Manage Options (values of your attribute)') ?> - <?php echo Mage::helper('ffuenf_attributeoptions')->__('In batch'); ?></h4>
+      <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('ffuenf_attributeoptions')->__('Manage Options (values of your attribute)') ?> - <?php echo Mage::helper('ffuenf_attributeoptions')->__('In batch'); ?></h4>
     </div>
     <div class="box">
       <div class="hor-scroll">
         <form action="<?php echo $this->getUrl('attributeoptions/adminhtml_index/index', array('_current'=>true)); ?>" method="post">
-          <p><?php echo Mage::helper('ffuenf_attributeoptions')->__('Add your attribute options quickly by putting a new option on each line;'); ?></p>
+          <p><?php echo Mage::helper('ffuenf_attributeoptions')->__('Add attribute options (one option per line)'); ?></p>
           <input type="hidden" name="attribute_id" value="<?php echo $this->getRequest()->getParam('attribute_id'); ?>" />
           <textarea name="options" style="width:80%;height:300px;"></textarea>
-          <p><button id="add_new_options_button" title="<?php echo $this->__('Add Options'); ?>" type="submit" class="scalable add" style=""><span><?php echo Mage::helper('ffuenf_attributeoptions')->__('Add Options'); ?></span></button></p>
+          <p><button id="add_new_options_button" title="<?php echo Mage::helper('ffuenf_attributeoptions')->__('Add Options'); ?>" type="submit" class="scalable add" style=""><span><?php echo Mage::helper('ffuenf_attributeoptions')->__('Add Options'); ?></span></button></p>
         </form>
       </div>
     </div>
@@ -59,7 +59,7 @@ if($attributeType == 'multiselect') {
 <?php endif; ?>
 <div class="entity-edit" id="matage-options-panel">
   <div class="entry-edit-head">
-    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('catalog')->__('Manage Options (values of your attribute)') ?> - <?php echo Mage::helper('ffuenf_attributeoptions')->__('One by one'); ?></h4>
+    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('ffuenf_attributeoptions')->__('Manage Options (values of your attribute)') ?> - <?php echo Mage::helper('ffuenf_attributeoptions')->__('One by one'); ?></h4>
   </div>
   <div class="box">
     <div class="hor-scroll">
@@ -68,10 +68,10 @@ if($attributeType == 'multiselect') {
           <?php foreach ($this->getStores() as $_store): ?>
             <th><?php echo $_store->getName() ?></th>
           <?php endforeach; ?>
-          <th><?php echo Mage::helper('catalog')->__('Position') ?></th>
-          <th class="nobr a-center"><?php echo Mage::helper('catalog')->__('Is Default') ?></th>
-          <th><?php echo Mage::helper('catalog')->__('Merge') ?></th>
-          <th><?php echo Mage::helper('catalog')->__('Merge goal') ?></th>
+          <th><?php echo Mage::helper('ffuenf_attributeoptions')->__('Position') ?></th>
+          <th class="nobr a-center"><?php echo Mage::helper('ffuenf_attributeoptions')->__('Is Default') ?></th>
+          <th><?php echo Mage::helper('ffuenf_attributeoptions')->__('Merge') ?></th>
+          <th><?php echo Mage::helper('ffuenf_attributeoptions')->__('Merge goal') ?></th>
           <th>
             Drag & drop sort <img src="<?php echo $this->getSkinUrl('images/arrow_sort_move.gif') ?>" style="display:none;" />
           </th>
@@ -97,73 +97,73 @@ if($attributeType == 'multiselect') {
             <?php endif;?>
           </td>
         </tr>
-                <?php
-                    /**
-                     * Getting the reversed version of the values array, so we
-                     * present the the options in the correct order
-                     */
-                    $optionValues = array_reverse($this->getOptionValues(), true);
-                    foreach ($optionValues as $_value):
-                ?>
-                    <?php if($_value->getChecked()) : ?>
-                        <tr class="option-row">
-                            <?php foreach ($this->getStores() as $_store): ?>
-                                <td><input name="option[value][<?php echo $_value->getId() ?>][<?php echo $_store->getId() ?>]" value="<?php echo $_value->getData('store' . $_store->getId()) ?>" class="input-text<?php if($_store->getId()==0): ?> required-option<?php endif; ?>" type="text" <?php if ($this->getReadOnly()):?> disabled="disabled"<?php endif;?>/></td>
-                            <?php endforeach; ?>
-                            <td class="a-center"><input class="input-text" type="text" name="option[order][<?php echo $_value->getId() ?>]" value="<?php echo $_value->getSortOrder() ?>" <?php if ($this->getReadOnly()):?> disabled="disabled"<?php endif;?>/></td>
-                            <td class="a-center default-checkbox">
-                                <input class="input-radio" type="<?php echo $defaultChooserInputType; ?>" name="default[]" value="<?php echo $_value->getId() ?>" checked="checked" />
-                            </td>
-                            <td class="a-left">
-                                <input type="hidden" class="delete-flag" name="option[delete][<?php echo $_value->getId() ?>]" value="" />
-                                <?php if (!$this->getReadOnly()):?>
-                                    <?php echo $this->getDeleteButtonHtml() ?>
-                                <?php endif;?>
-                            </td>
-                        </tr>
-                    <?php else : ?>
-                    <tr class="option-row">
-                        <?php foreach ($this->getStores() as $_store): ?>
-                            <td>
-                                <div class="replace-content pseudo-input input-text <?php if($_store->getId()==0): ?> required-option<?php endif; ?>" id="option[value][<?php echo $_value->getId() ?>][<?php echo $_store->getId() ?>]"><?php echo $_value->getData('store' . $_store->getId()) ?></div>
-                            </td>
-                        <?php endforeach; ?>
-                        <td>
-                            <div class="replace-content pseudo-input" id="option[order][<?php echo $_value->getId() ?>]"><?php echo $_value->getSortOrder() ?></div>
-                        </td>
-                        <td class="a-center default-checkbox">
-                            <div id="option_<?php echo $_value->getId() ?>" class="checkbox-radio-container replace-content">
-                                <?php if($_value->getChecked()) : ?>
-                                    <input class="input-radio" type="<?php echo $defaultChooserInputType; ?>" name="default[]" value="<?php echo $_value->getId() ?>" checked <?php if ($this->getReadOnly()):?> disabled="disabled"<?php endif;?>/>
-                                <?php else : ?>
-                                    <?php if('radio' == $defaultChooserInputType) : ?>
-                                        <span class="fake-radio"></span>
-                                    <?php else : ?>
-                                        <span class="fake-checkbox"></span>
-                                    <?php endif; ?>
-                                <?php endif; ?>
-                            </div>
-                        </td>
-                        <td class="a-left actions-column" id="delete_button_container_<?php echo $_value->getId() ?>">
-                            <div id="option[delete][<?php echo $_value->getId() ?>]" title="<?php echo $this->__('Delete') ?>" class="scalable left pseudo-delete-option">
-                                <span class="pseudo-delete-button" option_id="<?php echo $_value->getId(); ?>">
-                                    <span>
-                                        <span><?php echo $this->__('Delete') ?></span>
-                                    </span>
-                                </span>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php endif; ?>
-                    <?php endforeach; ?>
+      <?php
+          /**
+           * Getting the reversed version of the values array, so we
+           * present the the options in the correct order
+           */
+          $optionValues = array_reverse($this->getOptionValues(), true);
+          foreach ($optionValues as $_value):
+      ?>
+          <?php if($_value->getChecked()) : ?>
+              <tr class="option-row">
+                  <?php foreach ($this->getStores() as $_store): ?>
+                      <td><input name="option[value][<?php echo $_value->getId() ?>][<?php echo $_store->getId() ?>]" value="<?php echo $_value->getData('store' . $_store->getId()) ?>" class="input-text<?php if($_store->getId()==0): ?> required-option<?php endif; ?>" type="text" <?php if ($this->getReadOnly()):?> disabled="disabled"<?php endif;?>/></td>
+                  <?php endforeach; ?>
+                  <td class="a-center"><input class="input-text" type="text" name="option[order][<?php echo $_value->getId() ?>]" value="<?php echo $_value->getSortOrder() ?>" <?php if ($this->getReadOnly()):?> disabled="disabled"<?php endif;?>/></td>
+                  <td class="a-center default-checkbox">
+                      <input class="input-radio" type="<?php echo $defaultChooserInputType; ?>" name="default[]" value="<?php echo $_value->getId() ?>" checked="checked" />
+                  </td>
+                  <td class="a-left">
+                      <input type="hidden" class="delete-flag" name="option[delete][<?php echo $_value->getId() ?>]" value="" />
+                      <?php if (!$this->getReadOnly()):?>
+                          <?php echo $this->getDeleteButtonHtml() ?>
+                      <?php endif;?>
+                  </td>
+              </tr>
+          <?php else : ?>
+          <tr class="option-row">
+              <?php foreach ($this->getStores() as $_store): ?>
+                  <td>
+                      <div class="replace-content pseudo-input input-text <?php if($_store->getId()==0): ?> required-option<?php endif; ?>" id="option[value][<?php echo $_value->getId() ?>][<?php echo $_store->getId() ?>]"><?php echo $_value->getData('store' . $_store->getId()) ?></div>
+                  </td>
+              <?php endforeach; ?>
+              <td>
+                  <div class="replace-content pseudo-input" id="option[order][<?php echo $_value->getId() ?>]"><?php echo $_value->getSortOrder() ?></div>
+              </td>
+              <td class="a-center default-checkbox">
+                  <div id="option_<?php echo $_value->getId() ?>" class="checkbox-radio-container replace-content">
+                      <?php if($_value->getChecked()) : ?>
+                          <input class="input-radio" type="<?php echo $defaultChooserInputType; ?>" name="default[]" value="<?php echo $_value->getId() ?>" checked <?php if ($this->getReadOnly()):?> disabled="disabled"<?php endif;?>/>
+                      <?php else : ?>
+                          <?php if('radio' == $defaultChooserInputType) : ?>
+                              <span class="fake-radio"></span>
+                          <?php else : ?>
+                              <span class="fake-checkbox"></span>
+                          <?php endif; ?>
+                      <?php endif; ?>
+                  </div>
+              </td>
+              <td class="a-left actions-column" id="delete_button_container_<?php echo $_value->getId() ?>">
+                  <div id="option[delete][<?php echo $_value->getId() ?>]" title="<?php echo Mage::helper('ffuenf_attributeoptions')->__('Delete') ?>" class="scalable left pseudo-delete-option">
+                      <span class="pseudo-delete-button" option_id="<?php echo $_value->getId(); ?>">
+                          <span>
+                              <span><?php echo Mage::helper('ffuenf_attributeoptions')->__('Delete') ?></span>
+                          </span>
+                      </span>
+                  </div>
+              </td>
+          </tr>
+          <?php endif; ?>
+          <?php endforeach; ?>
       </table>
     </div>
     <input type="hidden" id="option-count-check" value="" />
     <p>&nbsp;</p>
-    <div><button id="merge_button" onclick="submitForm()" title="<?php echo $this->__('Merge selected attribute options'); ?>" type="button" class="scalable add" style=""><span><?php echo Mage::helper('ffuenf_attributeoptions')->__('Merge selected attributes'); ?></span></button></div>
+    <div><button id="merge_button" onclick="submitForm()" title="<?php echo Mage::helper('ffuenf_attributeoptions')->__('Merge selected attribute options'); ?>" type="button" class="scalable add" style=""><span><?php echo Mage::helper('ffuenf_attributeoptions')->__('Merge selected attribute options'); ?></span></button></div>
     <script>
       function submitForm() {
-        if(confirm('Are you sure you want to merge these attributes?')) {
+        if(confirm(<?php echo Mage::helper('ffuenf_attributeoptions')->__('Are you sure you want to merge these attributes?') ?>)) {
           $('edit_form').setAttribute('action','<?php echo $this->getUrl('attributeoptions/adminhtml_index/merge', array('_current'=>true)); ?>');
           $('edit_form').submit();
         }
@@ -394,17 +394,17 @@ if($attributeType == 'multiselect') {
     Event.observe('add_new_option_button', 'click', attributeOption.add.bind(attributeOption));
   }
   Validation.addAllThese([
-    ['required-option', '<?php echo Mage::helper('catalog')->__('Failed') ?>', function(v) {
+    ['required-option', '<?php echo Mage::helper('ffuenf_attributeoptions')->__('Failed') ?>', function(v) {
     return !Validation.get('IsEmpty').test(v);
   }]]);
   Validation.addAllThese([
-    ['required-options-count', '<?php echo Mage::helper('catalog')->__('Options is required') ?>', function(v) {
+    ['required-options-count', '<?php echo Mage::helper('ffuenf_attributeoptions')->__('Option is required') ?>', function(v) {
     return !Validation.get('IsEmpty').test(v);
   }]]);
   <?php foreach ($this->getOptionValues() as $_value): ?>
     attributeOption.add(<?php echo $_value->toJson() ?>);
   <?php endforeach; ?>
-  <?php if(Mage::getStoreConfig('attributeoptions/general/enabled')): ?>
+  <?php if (Mage::helper('ffuenf_attributeoptions')->isExtensionActive()): ?>
     function reposition() {
       i=0;
       $$('#option-grid tbody tr').each(function(element) {

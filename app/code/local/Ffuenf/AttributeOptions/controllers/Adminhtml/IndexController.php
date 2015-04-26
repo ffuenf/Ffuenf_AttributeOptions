@@ -19,8 +19,8 @@
 class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Controller_Front_Action
 {
     public function indexAction() {
-        if(!Mage::getStoreConfig('attributeoptions/general/enabled')) {
-            if(count($error)) Mage::getSingleton('adminhtml/session')->addError('Ffuenf AttributeOptions module is disabled! See configuration.');
+        if (!Mage::helper('ffuenf_attributeoptions')->isExtensionActive()) {
+            if(count($error)) Mage::getSingleton('adminhtml/session')->addError(Mage::helper('ffuenf_attributeoptions')->__('Extension Ffuenf_AttributeOptions is disabled! See configuration.'));
             $this->_redirectReferer();
         }
         $options = $this->getRequest()->getParam('options');
@@ -49,20 +49,20 @@ class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Contro
         $this->read = Mage::getSingleton('core/resource')->getConnection('core_read');
         $error = array();
         $success = array();
-        if(!Mage::getStoreConfig('attributeoptions/general/enabled')) {
-            if(count($error)) Mage::getSingleton('adminhtml/session')->addError('Ffuenf AttributeOptions module is disabled! See configuration.');
+        if (!Mage::helper('ffuenf_attributeoptions')->isExtensionActive()) {
+            if(count($error)) Mage::getSingleton('adminhtml/session')->addError(Mage::helper('ffuenf_attributeoptions')->__('Extension Ffuenf_AttributeOptions is disabled! See configuration.'));
             $this->_redirectReferer();
         }
         $merge = $this->getRequest()->getParam('merge');
         if(!isset($merge) || count($merge)==0) {
-            $error[] = "No options to merge selected!";
+            $error[] = Mage::helper('ffuenf_attributeoptions')->__('No options to merge selected!');
         }
         if(isset($merge) && count($merge)==1) {
-            $error[] = "Only one option to merge is selected!";
+            $error[] = Mage::helper('ffuenf_attributeoptions')->__('Only one option to merge is selected!');
         }
         $mergegoal = $this->getRequest()->getParam('mergegoal');
         if(empty($mergegoal)) {
-            $error[] = "You haven't selected a merge goal.";
+            $error[] = Mage::helper('ffuenf_attributeoptions')->__("You haven't selected a merge goal.");
         }
         $attribute_id = $this->getRequest()->getParam('attribute_id');
         if(count($error)==0) {
