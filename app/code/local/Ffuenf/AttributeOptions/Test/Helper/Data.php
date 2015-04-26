@@ -24,11 +24,11 @@
 class Ffuenf_AttributeOptions_Test_Helper_Data extends EcomDev_PHPUnit_Test_Case
 {
     /**
-    * Tests is extension active
-    *
-    * @test
-    * @covers Ffuenf_AttributeOptions_Helper_Data::isExtensionActive
-    */
+     * Tests is extension active
+     *
+     * @test
+     * @covers Ffuenf_AttributeOptions_Helper_Data::isExtensionActive
+     */
     public function testIsExtensionActive()
     {
         $this->assertTrue(
