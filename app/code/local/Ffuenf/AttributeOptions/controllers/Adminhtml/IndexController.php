@@ -59,8 +59,7 @@ class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Contro
         $merge = $this->getRequest()->getParam('merge');
         if (!isset($merge) || count($merge) == 0) {
             $error[] = Mage::helper('ffuenf_attributeoptions')->__('No options to merge selected!');
-        }
-        if (isset($merge) && count($merge) == 1) {
+        } elseif (isset($merge) && count($merge) == 1) {
             $error[] = Mage::helper('ffuenf_attributeoptions')->__('Only one option to merge is selected!');
         }
         $mergegoal = $this->getRequest()->getParam('mergegoal');

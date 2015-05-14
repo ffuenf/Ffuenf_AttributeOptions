@@ -38,7 +38,7 @@ class Ffuenf_AttributeOptions_Helper_Data extends Ffuenf_AttributeOptions_Helper
     */
     public function isExtensionActive()
     {
-        return $this->getStoreConfigFlag(self::CONFIG_EXTENSION_ACTIVE, 'bExtensionActive');
+        return $this->getStoreFlag(self::CONFIG_EXTENSION_ACTIVE, 'bExtensionActive');
     }
 
     public function getAttributeInformation($attribute)
@@ -68,7 +68,7 @@ class Ffuenf_AttributeOptions_Helper_Data extends Ffuenf_AttributeOptions_Helper
         $attributeoptionsmodel = Mage::getModel('eav/entity_attribute_source_table');
         $attributecode = $attributemodel->getIdByCode('catalog_product', $argattribute);
         $attribute = $attributemodel->load($attributecode);
-        $attributetable = $attributeoptionsmodel->setAttribute($attribute);
+        $attributeoptionsmodel->setAttribute($attribute);
         $options = $attributeoptionsmodel->getAllOptions(false);
         $value = array();
         $value['option'] = array($argvalue);
@@ -79,7 +79,7 @@ class Ffuenf_AttributeOptions_Helper_Data extends Ffuenf_AttributeOptions_Helper
         $attributeoptionsmodel = Mage::getModel('eav/entity_attribute_source_table');
         $attributecode = $attributemodel->getIdByCode('catalog_product', $argattribute);
         $attribute = $attributemodel->load($attributecode);
-        $attributetable = $attributeoptionsmodel->setAttribute($attribute);
+        $attributeoptionsmodel->setAttribute($attribute);
         $options = $attributeoptionsmodel->getAllOptions(false);
         foreach ($options as $option) {
             if ($option['label'] == $argvalue) {
