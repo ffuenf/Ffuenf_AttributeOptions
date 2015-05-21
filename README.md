@@ -2,13 +2,15 @@ Ffuenf_AttributeOptions
 =======================
 [![GitHub tag](https://img.shields.io/github/tag/ffuenf/Ffuenf_AttributeOptions.svg)][tag]
 [![Build Status](https://img.shields.io/travis/ffuenf/Ffuenf_AttributeOptions.svg)][travis]
+[![Code Quality](https://scrutinizer-ci.com/g/ffuenf/Ffuenf_AttributeOptions/badges/quality-score.png)][code_quality]
+[![Code Coverage](https://scrutinizer-ci.com/g/ffuenf/Ffuenf_AttributeOptions/badges/coverage.png)][code_coverage]
 [![Code Climate](https://codeclimate.com/github/ffuenf/Ffuenf_AttributeOptions/badges/gpa.svg)][codeclimate_gpa]
-[![Test Coverage](https://codeclimate.com/github/ffuenf/Ffuenf_AttributeOptions/badges/coverage.svg)][codeclimate_coverage]
 
 [tag]: https://github.com/ffuenf/Ffuenf_AttributeOptions
 [travis]: https://travis-ci.org/ffuenf/Ffuenf_AttributeOptions
+[code_quality]: https://scrutinizer-ci.com/g/ffuenf/Ffuenf_AttributeOptions
+[code_coverage]: https://scrutinizer-ci.com/g/ffuenf/Ffuenf_AttributeOptions
 [codeclimate_gpa]: https://codeclimate.com/github/ffuenf/Ffuenf_AttributeOptions
-[codeclimate_coverage]: https://codeclimate.com/github/ffuenf/Ffuenf_AttributeOptions
 
 This is a extension for Magento Community Edition that allows batch adding of attribute options and drag & drop to rearrange their order.
 
