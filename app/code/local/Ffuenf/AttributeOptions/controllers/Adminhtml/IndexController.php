@@ -1,24 +1,23 @@
 <?php
+
 /**
- * Ffuenf_AttributeOptions extension
- * 
+ * Ffuenf_AttributeOptions extension.
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the MIT License
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
  * http://opensource.org/licenses/mit-license.php
- * 
+ *
  * @category   Ffuenf
- * @package    Ffuenf_AttributeOptions
+ *
  * @author     Achim Rosenhagen <a.rosenhagen@ffuenf.de>
  * @copyright  Copyright (c) 2015 ffuenf (http://www.ffuenf.de)
  * @license    http://opensource.org/licenses/mit-license.php MIT License
-*/
-
+ */
 class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Controller_Front_Action
 {
-
     public function indexAction()
     {
         $error = array();
@@ -31,21 +30,21 @@ class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Contro
         $options = explode("\n", $options);
         $attr = Mage::helper('ffuenf_attributeoptions')->getAttributeInformation($this->getRequest()->getParam('attribute_id'));
         $existing = array_flip(Mage::helper('ffuenf_attributeoptions')->getAllAttributeValuesFromAttribute($attr['attribute_code']));
-        foreach ($options as $key=>$option) {
+        foreach ($options as $option) {
             $option = trim($option);
             if (!isset($existing[$option])) { // skip existing values
                 if (Mage::helper('ffuenf_attributeoptions')->addAttributeValue($attr['attribute_code'], $option)) {
-                    $success[] = Mage::helper('ffuenf_attributeoptions')->__('Attribute option') . ' \'' . $option . '\' ' . Mage::helper('ffuenf_attributeoptions')->__('is added to') . ' \'' . Mage::helper('ffuenf_attributeoptions')->__($attr['frontend_label']) . '\'';
+                    $success[] = Mage::helper('ffuenf_attributeoptions')->__('Attribute option').' \''.$option.'\' '.Mage::helper('ffuenf_attributeoptions')->__('is added to').' \''.Mage::helper('ffuenf_attributeoptions')->__($attr['frontend_label']).'\'';
                 }
             } else {
-                $error[] = Mage::helper('ffuenf_attributeoptions')->__('Attribute option') . ' \'' . $option . '\' ' . Mage::helper('ffuenf_attributeoptions')->__('already existed in') . ' \'' . Mage::helper('ffuenf_attributeoptions')->__($attr['frontend_label']) . '\'';
+                $error[] = Mage::helper('ffuenf_attributeoptions')->__('Attribute option').' \''.$option.'\' '.Mage::helper('ffuenf_attributeoptions')->__('already existed in').' \''.Mage::helper('ffuenf_attributeoptions')->__($attr['frontend_label']).'\'';
             }
         }
         if (count($success)) {
-            Mage::getSingleton('core/session')->addSuccess(implode("<br />", $success));
+            Mage::getSingleton('core/session')->addSuccess(implode('<br />', $success));
         }
         if (count($error)) {
-            Mage::getSingleton('core/session')->addError(implode("<br />", $error));
+            Mage::getSingleton('core/session')->addError(implode('<br />', $error));
         }
         $this->_redirectReferer();
     }
@@ -76,7 +75,7 @@ class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Contro
                 // do the hard work
                 $options = $this->read->fetchAll('SELECT value_id,value FROM catalog_product_entity_int WHERE attribute_id = ? AND value = ?', array($attributeid, $value));
                 foreach ($options as $option) {
-                    $this->write->query('UPDATE `' . Mage::getSingleton('core/resource')->getTableName('catalog_product_entity_int') . '` SET value = \'' . $mergegoal . '\' WHERE value_id = \'' . $option['value_id'] . '\'');
+                    $this->write->query('UPDATE `'.Mage::getSingleton('core/resource')->getTableName('catalog_product_entity_int').'` SET value = \''.$mergegoal.'\' WHERE value_id = \''.$option['value_id'].'\'');
                 }
                 // delete option value
                 $deleteOptions['delete'][$value] = true;
@@ -87,16 +86,16 @@ class Ffuenf_AttributeOptions_Adminhtml_IndexController extends Mage_Core_Contro
             $setup->addAttributeOption($deleteOptions);
         }
         if (count($success)) {
-            Mage::getSingleton('core/session')->addSuccess(implode("<br />", $success));
+            Mage::getSingleton('core/session')->addSuccess(implode('<br />', $success));
         }
         if (count($error)) {
-            Mage::getSingleton('core/session')->addError(implode("<br />", $error));
+            Mage::getSingleton('core/session')->addError(implode('<br />', $error));
         }
         $this->_redirectReferer();
     }
 
     /**
-     * Check if the admin user is allowed to access the functionality of this extension
+     * Check if the admin user is allowed to access the functionality of this extension.
      *
      * @return bool
      */
